@@ -21,24 +21,22 @@ async function Data(){
 
 
   return (
-    <div>
-      <h1>User Record</h1>
-      <div className="container">
-        <div className="row">
-            {User.map((i) =>(
-                <div className="mt-4 col-md-3">
-                    <div class="card" key={(i._id)}>
-                
-                        <div class="card-body">
-                            <h4 class="card-title">{i.name}</h4>
-                            <p class="card-text">{i.email}</p>
-                        </div>
-                    </div>
-                    
-                </div>
-            ))}
+<div className="container-fluid bg-light py-5">
+  <h1 className="text-center mb-4 text-primary">User Record</h1>
+  <div className="row">
+    {User.map((i) => (
+      <div className="col-md-4 mb-4" key={i._id}>
+        <div className="card shadow-lg border-light rounded">
+          <div className="card-body text-center">
+            <h5 className="card-title text-primary">{i.name}</h5>
+            <p className="card-text text-muted">{i.email}</p>
+            <p className="card-text text-secondary"><strong>Age:</strong> {i.age}</p>
+          </div>
         </div>
       </div>
-    </div>
+    ))}
+  </div>
+</div>
+
   )
 }

@@ -84,3 +84,31 @@ input {
 .submit-btn:hover {
   background-color: #218838;
 }
+
+body {
+  background-color: #f4f4f4; /* Light gray background for the entire page */
+}
+
+.card {
+  background-color: white;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);  /* Slightly lift the card on hover */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 1rem;
+}
