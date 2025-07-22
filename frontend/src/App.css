@@ -44,7 +44,7 @@ body {
 
 .form-container {
   max-width: 400px;
-  margin: 50px auto;
+  margin: 0px auto;
   padding: 20px 30px;
   background: #fff;
   border-radius: 10px;
@@ -111,4 +111,75 @@ body {
 
 .card-text {
   font-size: 1rem;
+}
+
+.register-background {
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+}
+
+.form-container {
+  background: transparent; /* no card style */
+  width: 100%;
+  max-width: 400px;
+}
+
+.form-container h2 {
+  font-weight: bold;
+  color: #0d6efd; /* Bootstrap primary */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-container label {
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.form-container input {
+  margin-bottom: 15px;
+  border-radius: 50px;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  width: 100%;
+}
+
+.form-container input:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.2rem rgba(13,110,253,.25);
+}
+
+.submit-btn {
+  width: 100%;
+  border-radius: 50px;
+  padding: 10px;
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #0b5ed7;
+}
+
+.go-showdata-btn {
+  width: 100%;
+  border-radius: 50px;
+  padding: 10px;
+  background-color: #198754;
+  color: white;
+  border: none;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.go-showdata-btn:hover {
+  background-color: #157347;
 }
