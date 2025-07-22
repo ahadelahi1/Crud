@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import "../ShowData.css"
+import '../ShowData.css'
 
 export default function ShowData() {
 
@@ -39,13 +39,9 @@ export default function ShowData() {
   }
 
   return (
-<div style={{ 
-  background: "linear-gradient(to right, #e0eafc, #cfdef3)",
-  minHeight: "100vh",
-  padding: "50px 0"
-}}>
+<div className="main-background">
   <div className="container">
-    <h1 className="text-center mb-5 text-primary" style={{fontWeight: 'bold'}}>User Record</h1>
+    <h1 className="text-center mb-5 text-primary fw-bold">User Record</h1>
 
     {/* Search input and Sort dropdown */}
     <div className="row mb-5">
@@ -76,25 +72,18 @@ export default function ShowData() {
     <div className="row">
       {filteredUsers.map((i) => (
         <div className="col-md-4 mb-4" key={i._id}>
-          <div 
-            className="card h-100 shadow-lg border-0 rounded-4"
-            style={{
-              transition: "transform 0.3s, box-shadow 0.3s",
-              cursor: "pointer",
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.transform = "translateY(-10px)";
-              e.currentTarget.style.boxShadow = "0 20px 30px rgba(0,0,0,0.1)";
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "0 10px 15px rgba(0,0,0,0.05)";
-            }}
-          >
+          <div className="card user-card">
             <div className="card-body text-center">
-              <h5 className="card-title text-primary" style={{fontWeight:'bold'}}>{i.name}</h5>
+              <h5 className="card-title text-primary fw-bold">{i.name}</h5>
               <p className="card-text text-muted">{i.email}</p>
               <p className="card-text text-secondary"><strong>Age:</strong> {i.age}</p>
+
+              {/* Buttons (no functions, only visible) */}
+              <div className="d-flex justify-content-center mt-3">
+                <button className="btn btn-success me-2">Edit</button>
+                <button className="btn btn-danger">Delete</button>
+              </div>
+
             </div>
           </div>
         </div>

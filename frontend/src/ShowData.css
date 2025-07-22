@@ -1,5 +1,17 @@
-.card:hover {
+.main-background {
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+  min-height: 100vh;
+  padding: 50px 0;
+}
+
+.user-card {
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.user-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 20px 30px rgba(0,0,0,0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
 }
