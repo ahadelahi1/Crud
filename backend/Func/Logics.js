@@ -66,6 +66,24 @@ let all =  {
       console.log(error.msg)
       res.status(504).json({msg : error.msg})
     }
+  },
+
+  DeleteRe : async function(req , res){
+    try { 
+      let { a } = req.params
+      let srch = await User.findById(a)
+      if (!srch){
+        res.status(404).json({msg : "Record Not Found"})
+      }
+      else {
+        await User.findByIdAndDelete(srch)
+        res.status(201).json({msg: "Record Delete"})
+      }
+      
+    } catch (error) {
+      res.status(504).json({msg:error.message})
+      
+    }
   }
   
 

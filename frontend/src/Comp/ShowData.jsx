@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import '../ShowData.css'
+import { toast } from 'react-toastify'
 
 export default function ShowData() {
 
@@ -22,12 +23,12 @@ export default function ShowData() {
     })
   }
 
-  // Filtered data based only on name
+ 
   let filteredUsers = User.filter((i) =>
     i.name.toLowerCase().includes(search.toLowerCase())
   )
 
-  // Sorting logic
+ 
   if (sortOption === "nameAsc") {
     filteredUsers.sort((a,b) => a.name.localeCompare(b.name))
   } else if (sortOption === "nameDesc") {
@@ -38,12 +39,27 @@ export default function ShowData() {
     filteredUsers.sort((a,b) => b.age - a.age)
   }
 
+
+  async function Delete(id,n){
+    if(window.confirm(`Are You Want To Delete ${n}`)){
+      await axios.delete(`http://localhost:4000/ht/delete/${id}`).then(()=>{
+        toast.success("Record Deleted");
+        Data()
+      }).catch((e) =>{
+        toast.error(e.message)
+      })
+    }
+
+  }
+
+
+
   return (
 <div className="main-background">
   <div className="container">
     <h1 className="text-center mb-5 text-primary fw-bold">User Record</h1>
 
-    {/* Search input and Sort dropdown */}
+
     <div className="row mb-5">
       <div className="col-md-4 offset-md-2 mb-3 mb-md-0">
         <input
@@ -78,10 +94,10 @@ export default function ShowData() {
               <p className="card-text text-muted">{i.email}</p>
               <p className="card-text text-secondary"><strong>Age:</strong> {i.age}</p>
 
-              {/* Buttons (no functions, only visible) */}
+
               <div className="d-flex justify-content-center mt-3">
                 <button className="btn btn-success me-2">Edit</button>
-                <button className="btn btn-danger">Delete</button>
+                <button className="btn btn-danger" onClick={() =>{Delete(i._id, i.name)}}>Delete</button>
               </div>
 
             </div>
