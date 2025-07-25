@@ -1,13 +1,20 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import '../ShowData.css'
-import { toast } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
 
 export default function ShowData() {
 
   let [User, setUser] = useState([])
   let [search, setSearch] = useState('')
   let [sortOption, setSortOption] = useState('')
+
+  let [name, setName] = useState('')
+  let [email, setEmail] = useState('')
+  let [password, setPass] = useState('')
+  let [age, setAge] = useState('')
+  let [city, setCity] = useState('')
+  let [id, setId] = useState('')
 
   useEffect(() => {
     Data();
@@ -52,10 +59,42 @@ export default function ShowData() {
 
   }
 
+  async function EditData(){
+    try {
+      await axios.put(`http://localhost:4000/ht/update/${id}`,{
+      b : name ,
+      c : email,
+      d : password,
+      e : age,
+      f : city
+    
+    }).then((a)=>{
+        toast.success(a.data.msg);
+        Data()
+      }).catch((e)=>{
+        toast.error(e.message)
+      })
+
+      
+    } catch (error) {
+      toast.error(error.response.data.msg)
+    }
+  }
+
+  function setData(a,b,c,d,e,f){
+    setName(a)
+    setEmail(b)
+    setPass(c)
+    setAge(d)
+    setCity(e)
+    setId(f)
+  }
+
 
 
   return (
 <div className="main-background">
+  <ToastContainer/>
   <div className="container">
     <h1 className="text-center mb-5 text-primary fw-bold">User Record</h1>
 
@@ -96,7 +135,10 @@ export default function ShowData() {
 
 
               <div className="d-flex justify-content-center mt-3">
-                <button className="btn btn-success me-2">Edit</button>
+                <button className="btn btn-success me-2"  data-bs-toggle="modal" data-bs-target="#exampleModal"
+                onClick={() => {
+                  setData(i.name,i.email,i.password,i.age,i.city,i._id)
+                }}>Edit</button>
                 <button className="btn btn-danger" onClick={() =>{Delete(i._id, i.name)}}>Delete</button>
               </div>
 
@@ -110,6 +152,40 @@ export default function ShowData() {
       <h4 className="text-center text-muted">No user found</h4>
     )}
   </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+  <input type="text" className="form-control mt-2" value={name} onChange={(e) => setName(e.target.value)} />
+  <input type="email" className="form-control mt-2" value={email} onChange={(e) => setEmail(e.target.value)} />
+  <input type="password" className="form-control mt-2" value={password} onChange={(e) => setPass(e.target.value)} />
+  <input type="text" className="form-control mt-2" value={age} onChange={(e) => setAge(e.target.value)} />
+  <input type="text" className="form-control mt-2" value={city} onChange={(e) => setCity(e.target.value)} />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onClick={()=> {
+          EditData();
+          document.querySelector(".close").click()
+        }} >Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
 </div>
   )
 }

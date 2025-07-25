@@ -84,6 +84,33 @@ let all =  {
       res.status(504).json({msg:error.message})
       
     }
+  },
+
+  EditRe : async function(req , res){
+    try { 
+      
+      let { a } = req.params
+      let {b,c,d,e,f} = req.body
+      let srch = await User.findById(a)
+      if (!srch){
+        res.status(404).json({msg : "Record Not Found"})
+      }
+      else {
+      let nepas = bb.hashSync(d,15)
+        await User.findByIdAndUpdate(a,{
+          name : b,
+          email : c,
+          password : nepas,
+          age : e,
+          city : f
+        })
+        res.status(201).json({msg: "Record Update"})
+      }
+      
+    } catch (error) {
+      res.status(504).json({msg:error.message})
+      
+    }
   }
   
 
