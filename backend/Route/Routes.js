@@ -8,5 +8,6 @@ r.post("/Reg", all.Register);
 r.get("/get", all.Read);
 r.delete("/delete/:a", all.DeleteRe);
 r.put("/update/:a", all.EditRe);
+r.post("/login", all.Login);
 
 module.exports = r

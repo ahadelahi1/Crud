@@ -1,5 +1,6 @@
 const User = require("../Connection/User");
 let bb = require("bcrypt")
+let jwt = require("jsonwebtoken")
 
 let mail = require("nodemailer");
 
@@ -110,6 +111,30 @@ let all =  {
     } catch (error) {
       res.status(504).json({msg:error.message})
       
+    }
+  },
+
+  Login : async function (req ,res ){
+    try {
+
+      let {email , pswd } = req.body;
+      let email_check = await User.findOne({email : email})
+      console.log(email_check)
+      if (!email_check) {
+      res.status(404).json({msg : "Email Not Found"})
+    }
+
+    let pswd_check = bb.compareSync(pswd, email_check.password)
+    if(!pswd_check){
+      res.status(404).json({msg : "Password Invalid"})
+    }
+
+    let  mera_token = jwt.sign({id: email_check._id},"bhai", {expiresIn : "2h"})
+    res.status(200).json({mera_token, "user" : {id : email_check._id, name : email_check.name}})
+      
+    } catch (error) {
+      res.status(504).json({msg : error.message})
+      console.log(error.message)
     }
   }
   
